@@ -3,6 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# SHAKE CUSTOM FILES
+10mPlots/
+24hPlots/
+*.png
+
 # User-specific files
 *.rsuser
 *.suo
