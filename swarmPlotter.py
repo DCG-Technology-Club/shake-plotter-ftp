@@ -82,13 +82,10 @@ def registerImage(imageType, imageName):
 def uploadFTP(localPath, ftpPath, fileName):
     f = FTP(ftp["url"], ftp["user"], ftp["pass"])
     file = open(localPath, 'rb')
-    print(localPath)
-    print(fileName)
     shakeDir = 'shake'
 
     if not shakeDir in f.nlst():
         f.mkd(shakeDir)
-    
     f.cwd(shakeDir)
 
     if not ftpPath in f.nlst():
@@ -96,5 +93,5 @@ def uploadFTP(localPath, ftpPath, fileName):
     f.cwd(ftpPath)
 
     cmd = "STOR " + fileName
-
     f.storbinary(cmd, file)
+    return True
