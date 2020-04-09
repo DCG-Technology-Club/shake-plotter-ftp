@@ -24,7 +24,8 @@ def makeFileName():
 
 # -------------------- DIRECTORY -------------------- #
 def directory(folder):
-    currentDirectory = os.getcwd()
+    #currentDirectory = os.getcwd()
+    currentDirectory = os.path.dirname(os.path.realpath(__file__))
     return currentDirectory + '/' + folder
 
 # -------------------- FILE PATH -------------------- #
