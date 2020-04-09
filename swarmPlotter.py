@@ -5,8 +5,12 @@ import datetime
 import time
 import requests
 import logging as log
+from urllib.parse import quote, quote_plus
 from dotenv import load_dotenv
 load_dotenv()
+
+# -------------------- GET CURRENT DATE -------------------- #
+currentDate = datetime.datetime.now()
 
 
 # -------------------- GET FTP DETAILS FROM .ENV -------------------- #
@@ -18,7 +22,7 @@ ftp = {
 
 # -------------------- MAKE FILE NAME -------------------- #
 def makeFileName():
-    dateString = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
+    dateString = currentDate.strftime("%Y-%m-%d_%H-%M")
     currentFileName = dateString + ".png"
     return currentFileName
 
@@ -74,7 +78,10 @@ def registerImage(imageType, imageName):
     'Host':'api.dcg.edu.pr'
     }
 
-    dataObj="imageTypeID=" + imageType + "&imageName=" + imageName
+    imageDateStr = currentDate.strftime("%-m/%-d/%Y %-I:%M:00 %p")
+    imageDate = quote_plus(imageDateStr)
+
+    dataObj="imageTypeID=" + imageType + "&imageName=" + imageName + "&imageDate=" + imageDateStr
     x = requests.post(url, data = dataObj, headers = headers)
 
     print(x.status_code)
